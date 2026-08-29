@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luyện Tiếng Anh Lớp 1 - Gia Đình</title>
+  <style>
+    :root {
+      --primary-color: #ff6f61;
+      --secondary-color: #4caf50;
+      --accent-color: #ffbf00;
+      --bg-color: #f0f8ff;
+      --color-green: #2ea44f;
+      --color-yellow: #d97706;
+      --color-red: #ea4335;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    /* Scoreboard & User Header */
+    .user-panel {
+      background: #ffffff;
+      padding: 15px 20px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 950px;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .user-input-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-input-group input {
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .scores-container {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .score-badge {
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #fff;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    }
+
+    .badge-shadow { background-color: #0284c7; }
+    .badge-quiz { background-color: #9333ea; }
+    .badge-total { background-color: var(--accent-color); font-size: 15px; }
+
+    .btn-submit-task {
+      background-color: #16a34a;
+      box-shadow: 0 4px #15803d;
+      font-weight: bold;
+      padding: 8px 18px;
+      font-size: 15px;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      background-color: #ffffff;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Controls */
+    .control-panel {
+      background: #ffffff;
+      padding: 10px 20px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    /* Grid Layout */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      border: 3px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 10px;
+      background-color: #fafafa;
+    }
+
+    .english-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin: 10px 0 5px 0;
+    }
+
+    .vietnamese-text {
+      font-size: 15px;
+      color: #27ae60;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px #388e3c;
+      transition: transform 0.1s;
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px #388e3c;
+    }
+
+    /* Quiz & Shadowing Section */
+    .quiz-card {
+      background: white;
+      max-width: 550px;
+      margin: 0 auto;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .quiz-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      border-radius: 15px;
+    }
+
+    .progress-pill {
+      display: inline-block;
+      background-color: #e2e8f0;
+      color: #475569;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    /* Controls Loa & Mic */
+    .shadow-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-audio {
+      background-color: #0284c7;
+      box-shadow: 0 4px #0369a1;
+      font-weight: bold;
+      padding: 12px 20px;
+    }
+
+    .btn-mic {
+      background-color: #e11d48;
+      box-shadow: 0 4px #be123c;
+      font-weight: bold;
+      padding: 12px 20px;
+    }
+
+    .btn-next-step {
+      background-color: #9333ea;
+      box-shadow: 0 4px #7e22ce;
+      font-weight: bold;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .option-btn {
+      background-color: #f8f9fa;
+      border: 2px solid #ddd;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .option-btn:hover {
+      background-color: #e2e8f0;
+    }
+
+    /* Feedback Styles */
+    .mic-status {
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .word-analysis {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 15px 0;
+      padding: 10px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .word-badge {
+      font-size: 22px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 10px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .word-green {
+      color: #ffffff;
+      background-color: var(--color-green);
+      box-shadow: 0 2px 4px rgba(46, 164, 79, 0.3);
+    }
+
+    .word-yellow {
+      color: #ffffff;
+      background-color: var(--color-yellow);
+      box-shadow: 0 2px 4px rgba(217, 119, 6, 0.3);
+    }
+
+    .word-red {
+      color: #ffffff;
+      background-color: var(--color-red);
+      box-shadow: 0 2px 4px rgba(234, 67, 53, 0.3);
+    }
+
+    .feedback-box {
+      text-align: left;
+      background: #fff8e6;
+      border-left: 5px solid var(--accent-color);
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .feedback-box h4 {
+      margin: 0 0 8px 0;
+      color: #b45309;
+      font-size: 16px;
+    }
+
+    .feedback-item {
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #fcd34d;
+    }
+
+    .feedback-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-icon {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .report-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 15px 0;
+      border: 2px solid #e2e8f0;
+    }
+
+    .report-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #cbd5e1;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .report-row:last-child {
+      border-bottom: none;
+    }
+
+    .star-rating {
+      font-size: 30px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modal Yêu Cầu Cấp Quyền Micro -->
+  <div class="modal-overlay" id="mic-modal">
+    <div class="modal-content">
+      <div class="modal-icon">🎙️</div>
+      <h3 style="color: var(--primary-color); margin-top: 0;">Mở Micro Để Học Cùng Bé</h3>
+      <p style="font-size: 15px; color: #555;">Hệ thống cần sử dụng Micro để nghe bé đọc bài. Bé hãy nhấn nút bên dưới và chọn <b>"Cho phép" (Allow)</b> khi Chrome hỏi nhé!</p>
+      <button class="btn" style="background-color: #2563eb; box-shadow: 0 4px #1d4ed8; width: 100%; margin-top: 10px;" onclick="requestMicPermission()">✅ Cho Phép Mở Micro</button>
+    </div>
+  </div>
+
+  <!-- Modal Báo Cáo Kết Quả Nộp Bài -->
+  <div class="modal-overlay" id="report-modal">
+    <div class="modal-content">
+      <div class="modal-icon">🎉</div>
+      <h2 style="color: var(--primary-color); margin-top: 0;">KẾT QUẢ HỌC TẬP</h2>
+      <p style="font-size: 16px;">Chúc mừng học sinh: <b id="report-student-name" style="color: #0284c7;"></b></p>
+      
+      <div class="star-rating" id="report-stars">⭐⭐⭐⭐⭐</div>
+
+      <div class="report-card">
+        <div class="report-row">
+          <span>🎙️ Điểm Shadowing (Nói):</span>
+          <span id="report-shadow-score" style="color: #0284c7;">0</span>
+        </div>
+        <div class="report-row">
+          <span>🖼️ Điểm Bài Chọn (Trắc nghiệm):</span>
+          <span id="report-quiz-score" style="color: #9333ea;">0</span>
+        </div>
+        <div class="report-row" style="font-size: 18px; color: #d97706; margin-top: 5px; padding-top: 10px; border-top: 2px dashed #cbd5e1;">
+          <span>🏆 Tổng Điểm:</span>
+          <span id="report-total-score">0</span>
+        </div>
+      </div>
+
+      <p id="report-evaluation" style="font-weight: bold; color: #16a34a; font-size: 16px;"></p>
+
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <button class="btn" style="background-color: #64748b; box-shadow: 0 4px #475569; flex: 1;" onclick="closeReportModal()">Xem Lại Bài</button>
+        <button class="btn" style="background-color: #2563eb; box-shadow: 0 4px #1d4ed8; flex: 1;" onclick="restartAll()">🔄 Làm Lại Từ Đầu</button>
+      </div>
+    </div>
+  </div>
+
+  <h1>🎉 Bé Luyện Tiếng Anh Lớp 1</h1>
+
+  <!-- Thanh thông tin học sinh & Điểm số tách biệt -->
+  <div class="user-panel">
+    <div class="user-input-group">
+      <label for="student-name"><b>Họ và tên:</b></label>
+      <input type="text" id="student-name" placeholder="Nhập tên của bé..." value="Bé Siêu Quậy">
+    </div>
+
+    <div class="scores-container">
+      <div class="score-badge badge-shadow">🎙️ Nói: <span id="shadow-score">0</span></div>
+      <div class="score-badge badge-quiz">🖼️ Bài Chọn: <span id="quiz-score">0</span></div>
+      <div class="score-badge badge-total">🏆 Tổng: <span id="total-score">0</span></div>
+    </div>
+
+    <button class="btn btn-submit-task" onclick="submitAssignment()">📋 Nộp Bài</button>
+  </div>
+
+  <!-- Thanh Điều Hướng Tab -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" id="tab-btn-listen" onclick="switchTab('listen-tab')">👂 1. Luyện Nghe</button>
+    <button class="tab-btn" id="tab-btn-shadow" onclick="switchTab('shadow-tab')">🎙️ 2. Shadowing (Nói)</button>
+    <button class="tab-btn" id="tab-btn-quiz" onclick="switchTab('quiz-tab')">🖼️ 3. Nhìn Hình Trả Lời</button>
+  </div>
+
+  <!-- TAB 1: LUYỆN NGHE -->
+  <div id="listen-tab" class="tab-content active">
+    <div class="control-panel">
+      <label for="speed">Tốc độ giọng đọc: </label>
+      <select id="speed">
+        <option value="0.5" selected>Chậm (x0.5)</option>
+        <option value="0.75">Vừa (x0.75)</option>
+        <option value="1.0">Bình thường (x1.0)</option>
+      </select>
+    </div>
+    <div class="grid-container" id="listen-cards"></div>
+  </div>
+
+  <!-- TAB 2: SHADOWING (NÓI) -->
+  <div id="shadow-tab" class="tab-content">
+    <div class="quiz-card">
+      <div class="progress-pill" id="shadow-progress">Câu 1 / 10</div>
+      <h2>🎙️ Luyện Shadowing (Nhại Giọng)</h2>
+      <p style="color: #666; font-size: 14px;">Bé hãy nhấn <b>"🔊 Nghe Mẫu"</b> trước, sau đó nhấn <b>"🎙️ Bắt Đầu Nói"</b> để đọc lại nhé!</p>
+      
+      <img id="shadow-img" src="" alt="Shadowing Picture">
+      <div class="vietnamese-text" id="shadow-vi-text" style="margin-top: 10px;">Đây là bố của tôi.</div>
+
+      <!-- Hiển thị phân tích từ đúng/sai -->
+      <div class="word-analysis" id="word-analysis-container"></div>
+
+      <!-- Controls Loa & Mic -->
+      <div class="shadow-controls">
+        <button class="btn btn-audio" onclick="speakSample()">🔊 1. Nghe Mẫu</button>
+        <button class="btn btn-mic" onclick="startListening()">🎙️ 2. Bắt Đầu Nói</button>
+      </div>
+      
+      <div class="mic-status" id="mic-status-text"></div>
+      <p id="speech-result" style="font-size: 16px; margin-top: 10px; font-weight: bold;"></p>
+
+      <!-- Khung hướng dẫn sửa lỗi -->
+      <div class="feedback-box" id="feedback-box" style="display: none;">
+        <h4>💡 Mẹo Nhỏ Cho Bé Đọc Đúng Hơn:</h4>
+        <div id="feedback-list"></div>
+      </div>
+
+      <!-- NÚT CHUYỂN TẬP VÀ CHUYỂN SANG TRẮC NGHIỆM -->
+      <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+        <button class="btn" style="background-color: #0284c7; box-shadow: 0 4px #0369a1;" onclick="nextShadowCard()">Câu Tiếp Theo ➔</button>
+        <button class="btn btn-next-step" onclick="goToQuizTab()">Chuyển Sang Bài Chọn (Trắc Nghiệm) ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: TRẮC NGHIỆM (BÀI CHỌN) -->
+  <div id="quiz-tab" class="tab-content">
+    <div class="quiz-card">
+      <div class="progress-pill" id="quiz-progress">Câu 1 / 10</div>
+      <h2>🖼️ Nhìn Hình Chọn Mẫu Câu Đúng</h2>
+      <img id="quiz-img" src="" alt="Quiz Image">
+      <div class="options-grid" id="quiz-options"></div>
+      <p id="quiz-feedback" style="font-weight: bold; margin-top: 15px;"></p>
+    </div>
+  </div>
+
+  <script>
+    const familyData = [
+      {
+        en: "This is my father.",
+        vi: "Đây là bố của tôi.",
+        img: "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcReuvDGlvpZ5OvFcqHEktc7y4nyDMYvPYS_R2ODDnDh1N_Oc9uLjdVc8sVD2JxBBcUmdy0fEBV1uAw2NHk"
+      },
+      {
+        en: "This is my mother.",
+        vi: "Đây là mẹ của tôi.",
+        img: "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcT1M2jsw4cOd7hW6uY_kh0W_JWpcjxcPoSqAEbNmoooyeiSxxqSpIw-mNGU4o-TdkyLEnRx6qNTggK6THw"
+      },
+      {
+        en: "This is my parents.",
+        vi: "Đây là bố mẹ của tôi.",
+        img: "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSt-ofaBg3JDaZlukxamStRgeq7QyUm_OHnKItBb3fd0L3mXjd5g8Lw1WYvrtTl0aLgwSpIceBLkLFy8Kg"
+      },
+      {
+        en: "This is my grandfather.",
+        vi: "Đây là ông của tôi.",
+        img: "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTKvd7_xF6Xq-pgwiJeJZHGgW24fJ5UjIKmvBqr7AuJRQyf8TYct1XDrQDr7vgQJfFln8TuEOcgOjWYJS4"
+      },
+      {
+        en: "This is my grandmother.",
+        vi: "Đây là bà của tôi.",
+        img: "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQi89kSEUyDSXfcUc-pKPsg_Q1P2NdpJn20IDD12wfbbRmhpskYtnFwvebqYDSsPl3jjAsWwbcY_wh6I4E"
+      },
+      {
+        en: "This is my uncle.",
+        vi: "Đây là chú/bác của tôi.",
+        img: "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSbhj5SJkARCb9jv2dEt2DxOpgGDWkqO2Zf5BW9BoqAGSKOzUJMk4Drl_97Wu09fuCgRcaWgbF5LVx5TXY"
+      },
+      {
+        en: "This is my aunt.",
+        vi: "Đây là cô/dì của tôi.",
+        img: "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSiueASlFcpW-0T3AmM9edAq8q-hX_3PS-qy3Hd2XWv2rlk-aEjGSrWzIh_czmphGEYF5KyMSIlvBUlD3k"
+      },
+      {
+        en: "This is my brother.",
+        vi: "Đây là anh/em trai của tôi.",
+        img: "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcT00FlqzSOWiyFwrmaJbXqVkSvH3stDaitbdZJusAyzXWQojnTDB_FahsxQ7z_m9aIBaGroDxFkFeRpsI0"
+      },
+      {
+        en: "This is my sister.",
+        vi: "Đây là chị/em gái của tôi.",
+        img: "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcRKi8sjsIN_m_U0NNI2OqSRxKZQJLrhvPmGdppb_eArjjdsIWOklp16Wky8gaEBPrlnKMfrSjiU1vAouWQ"
+      },
+      {
+        en: "This is my cousin.",
+        vi: "Đây là anh/chị/em họ của tôi.",
+        img: "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSt-ofaBg3JDaZlukxamStRgeq7QyUm_OHnKItBb3fd0L3mXjd5g8Lw1WYvrtTl0aLgwSpIceBLkLFy8Kg"
+      }
+    ];
+
+    const grade1PhoneticGuide = {
+      "this": { reason: "Bé đọc chưa xì âm 's' ở cuối.", fix: "Bé thè nhẹ đầu lưỡi rồi xì nhẹ âm 's' (Th-i-s) nhé!" },
+      "is": { reason: "Bé dễ quên xì âm 's' ở cuối.", fix: "Từ này đọc là 'iz', bé hãy xì nhẹ một tiếng 's' nhé!" },
+      "my": { reason: "Bé phát âm chưa tròn môi.", fix: "Bé đọc tròn tiếng 'mai' nhé!" },
+      "father": { reason: "Bé hay đọc thành 'fa-đơ'.", fix: "Bé kẹp nhẹ đầu lưỡi vào răng đọc 'fa-thơ' nhé." },
+      "mother": { reason: "Bé đọc chưa đúng âm 'th'.", fix: "Bé đọc 'mơ-thơ', chạm nhẹ đầu lưỡi vào răng trên nhé!" },
+      "parents": { reason: "Bé quên bật âm 's' ở cuối.", fix: "Bé nhớ đọc 'pe-rơn-ts' có âm 's' ở cuối nhé!" },
+      "brother": { reason: "Bé hay quên âm 'br' đầu.", fix: "Bé mím nhẹ môi rồi bật ra 'brơ-thơ' nhé!" },
+      "sister": { reason: "Bé hay quên âm 's' ở giữa.", fix: "Bé đọc là 'sis-tơ', xì nhẹ ở giữa một cái nhé!" },
+      "grandfather": { reason: "Từ dài bé đọc dễ bị vấp.", fix: "Bé đọc từ từ: 'gờ-ran-fa-thơ' nhé!" },
+      "grandmother": { reason: "Từ dài làm bé quên âm giữa.", fix: "Bé đọc từ từ từng tiếng: 'gờ-ran-mơ-thơ' nhé!" },
+      "uncle": { reason: "Bé đọc chưa chuẩn âm 'k-l'.", fix: "Bé đọc giống như 'ăng-cơ-l' nhé!" },
+      "aunt": { reason: "Bé quên bật âm 't' ở cuối.", fix: "Bé đọc 'an' rồi bật nhẹ hơi chữ 't' ở cuối nhé!" },
+      "cousin": { reason: "Bé hay đọc thành 'co-sin'.", fix: "Bé đọc là 'cơ-zần' nhẹ nhàng nhé!" }
+    };
+
+    let shadowScore = 0;
+    let quizScore = 0;
+
+    let currentShadowIndex = 0;
+    let currentQuizIndex = 0;
+    let recognition;
+    let isMicGranted = false;
+
+    window.onload = () => {
+      renderListenCards();
+      setupShadowCard();
+      setupQuizCard();
+      initSpeechRecognition();
+      updateScoreUI();
+    };
+
+    function addShadowScore(points) {
+      shadowScore += points;
+      updateScoreUI();
+    }
+
+    function addQuizScore(points) {
+      quizScore += points;
+      updateScoreUI();
+    }
+
+    function updateScoreUI() {
+      document.getElementById('shadow-score').innerText = shadowScore;
+      document.getElementById('quiz-score').innerText = quizScore;
+      document.getElementById('total-score').innerText = shadowScore + quizScore;
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      
+      if (tabId === 'listen-tab') document.getElementById('tab-btn-listen').classList.add('active');
+      if (tabId === 'shadow-tab') document.getElementById('tab-btn-shadow').classList.add('active');
+      if (tabId === 'quiz-tab') document.getElementById('tab-btn-quiz').classList.add('active');
+    }
+
+    /* Chuyển trực tiếp sang bài tập trắc nghiệm */
+    function goToQuizTab() {
+      switchTab('quiz-tab');
+    }
+
+    /* --- PHẦN 1: LUYỆN NGHE --- */
+    function renderListenCards() {
+      const container = document.getElementById('listen-cards');
+      container.innerHTML = '';
+      familyData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.en}">
+          <div class="english-text">${item.en}</div>
+          <div class="vietnamese-text">${item.vi}</div>
+          <button class="btn" onclick="speak('${item.en}')">🔊 Nghe đọc</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function speak(text, callback) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = parseFloat(document.getElementById('speed').value);
+        
+        const voices = window.speechSynthesis.getVoices();
+        const ukVoice = voices.find(v => v.lang === 'en-GB' || v.lang.includes('GB'));
+        if (ukVoice) utterance.voice = ukVoice;
+
+        if (callback) utterance.onend = callback;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    /* --- PHẦN 2: SHADOWING (NÓI) --- */
+    function setupShadowCard() {
+      const item = familyData[currentShadowIndex];
+      document.getElementById('shadow-progress').innerText = `Câu ${currentShadowIndex + 1} / ${familyData.length}`;
+      document.getElementById('shadow-img').src = item.img;
+      document.getElementById('shadow-vi-text').innerText = item.vi;
+      document.getElementById('speech-result').innerText = '';
+      document.getElementById('mic-status-text').innerText = '';
+      document.getElementById('feedback-box').style.display = 'none';
+
+      renderWordBadges(item.en.split(" ").map(w => ({ word: w, status: 'default' })));
+    }
+
+    function renderWordBadges(wordsWithStatus) {
+      const container = document.getElementById('word-analysis-container');
+      container.innerHTML = '';
+      wordsWithStatus.forEach(item => {
+        const badge = document.createElement('span');
+        let colorClass = '';
+        if (item.status === 'green') colorClass = 'word-green';
+        else if (item.status === 'yellow') colorClass = 'word-yellow';
+        else if (item.status === 'red') colorClass = 'word-red';
+
+        badge.className = `word-badge ${colorClass}`;
+        badge.style.backgroundColor = item.status === 'default' ? '#e2e8f0' : '';
+        badge.style.color = item.status === 'default' ? '#475569' : '';
+        badge.innerText = item.word;
+        container.appendChild(badge);
+      });
+    }
+
+    function nextShadowCard() {
+      if (currentShadowIndex === familyData.length - 1) {
+        let confirmGo = confirm("🎉 Bé đã luyện đọc hết tất cả các câu Shadowing rồi!\nBé có muốn chuyển sang phần 'Nhìn Hình Trả Lời' (Trắc nghiệm) không?");
+        if (confirmGo) {
+          goToQuizTab();
+          return;
+        }
+      }
+      currentShadowIndex = (currentShadowIndex + 1) % familyData.length;
+      setupShadowCard();
+    }
+
+    function speakSample() {
+      const targetText = familyData[currentShadowIndex].en;
+      document.getElementById('mic-status-text').innerText = "🔊 Đang đọc mẫu...";
+      document.getElementById('mic-status-text').style.color = "#0284c7";
+      
+      speak(targetText, () => {
+        document.getElementById('mic-status-text').innerText = "👉 Lượt của bé! Bấm '🎙️ 2. Bắt Đầu Nói' để đọc nhé.";
+        document.getElementById('mic-status-text').style.color = "#475569";
+      });
+    }
+
+    function startListening() {
+      if (!isMicGranted && navigator.mediaDevices) {
+        document.getElementById('mic-modal').classList.add('active');
+        return;
+      }
+
+      if (recognition) {
+        try {
+          recognition.start();
+        } catch(e) {}
+      } else {
+        alert("Trình duyệt không hỗ trợ nhận diện giọng nói!");
+      }
+    }
+
+    async function requestMicPermission() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop());
+        isMicGranted = true;
+        document.getElementById('mic-modal').classList.remove('active');
+        document.getElementById('mic-status-text').innerText = "🟢 Micro đã sẵn sàng! Bấm nút Mic để nói nhé.";
+        document.getElementById('mic-status-text').style.color = "#27ae60";
+      } catch (err) {
+        alert("Vui lòng cho phép sử dụng Micro trên trình duyệt Chrome để học nhé!");
+      }
+    }
+
+    function initSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+
+        recognition.onstart = () => {
+          document.getElementById('mic-status-text').innerText = "🔴 Đang bật Micro... Bé hãy đọc thật to nhé!";
+          document.getElementById('mic-status-text').style.color = "#e11d48";
+        };
+
+        recognition.onresult = (event) => {
+          const spokenText = event.results[0][0].transcript.toLowerCase();
+          document.getElementById('mic-status-text').innerText = "🟢 Đã nghe xong! Đang chấm điểm...";
+          document.getElementById('mic-status-text').style.color = "#27ae60";
+
+          evaluatePronunciation(spokenText);
+        };
+
+        recognition.onerror = () => {
+          document.getElementById('mic-status-text').innerText = "⚠️ Chưa nghe rõ giọng bé. Bé bấm nút Mic thử lại nhé!";
+          document.getElementById('mic-status-text').style.color = "#d97706";
+        };
+      }
+    }
+
+    function evaluatePronunciation(spokenText) {
+      const targetText = familyData[currentShadowIndex].en;
+      
+      const targetWords = targetText.replace('.', '').split(' ');
+      const spokenWords = spokenText.replace('.', '').split(' ');
+
+      let analysis = [];
+      let feedbackListHtml = "";
+      let correctCount = 0;
+
+      targetWords.forEach((targetWord) => {
+        const cleanTarget = targetWord.toLowerCase();
+        
+        if (spokenWords.includes(cleanTarget)) {
+          analysis.push({ word: targetWord, status: 'green' });
+          correctCount++;
+        } 
+        else if (spokenWords.some(sw => isSimilar(sw, cleanTarget))) {
+          analysis.push({ word: targetWord, status: 'yellow' });
+          const guide = grade1PhoneticGuide[cleanTarget];
+          if (guide) {
+            feedbackListHtml += `<div class="feedback-item"><b>• Từ "${targetWord}":</b> ${guide.reason}<br>👉 <i>Cách sửa:</i> ${guide.fix}</div>`;
+          } else {
+            feedbackListHtml += `<div class="feedback-item"><b>• Từ "${targetWord}":</b> Bé đọc gần đúng rồi, chú ý rõ tiếng hơn nhé!</div>`;
+          }
+        } 
+        else {
+          analysis.push({ word: targetWord, status: 'red' });
+          const guide = grade1PhoneticGuide[cleanTarget];
+          if (guide) {
+            feedbackListHtml += `<div class="feedback-item"><b>• Từ "${targetWord}" (Chưa đúng/Thiếu):</b><br>👉 <i>Lý do & Cách đọc:</i> ${guide.fix}</div>`;
+          } else {
+            feedbackListHtml += `<div class="feedback-item"><b>• Từ "${targetWord}":</b> Bé quên đọc từ này rồi. Lắng nghe máy đọc lại nhé!</div>`;
+          }
+        }
+      });
+
+      renderWordBadges(analysis);
+
+      const resultMsg = document.getElementById('speech-result');
+      const feedbackBox = document.getElementById('feedback-box');
+      const feedbackList = document.getElementById('feedback-list');
+
+      if (correctCount === targetWords.length) {
+        resultMsg.innerText = `🎉 Bé giỏi quá! Phát âm chính xác hoàn hảo! (+10 điểm Shadowing)`;
+        resultMsg.style.color = "#27ae60";
+        feedbackBox.style.display = 'none';
+        addShadowScore(10);
+      } else {
+        resultMsg.innerText = `Bé vừa đọc: "${spokenText}". Xem gợi ý bên dưới để đọc hay hơn nhé! (+5 điểm cố gắng)`;
+        resultMsg.style.color = "#d97706";
+        feedbackList.innerHTML = feedbackListHtml;
+        feedbackBox.style.display = 'block';
+        addShadowScore(5);
+      }
+    }
+
+    function isSimilar(s1, s2) {
+      if (Math.abs(s1.length - s2.length) > 2) return false;
+      let matches = 0;
+      for (let i = 0; i < Math.min(s1.length, s2.length); i++) {
+        if (s1[i] === s2[i]) matches++;
+      }
+      return (matches / Math.max(s1.length, s2.length)) >= 0.5;
+    }
+
+    /* --- PHẦN 3: TRẮC NGHIỆM (BÀI CHỌN) --- */
+    function setupQuizCard() {
+      const item = familyData[currentQuizIndex];
+      document.getElementById('quiz-progress').innerText = `Câu ${currentQuizIndex + 1} / ${familyData.length}`;
+      document.getElementById('quiz-img').src = item.img;
+      document.getElementById('quiz-feedback').innerText = '';
+
+      let options = [item.en];
+      while (options.length < 4) {
+        let randomItem = familyData[Math.floor(Math.random() * familyData.length)].en;
+        if (!options.includes(randomItem)) options.push(randomItem);
+      }
+      options.sort(() => Math.random() - 0.5);
+
+      const optionsContainer = document.getElementById('quiz-options');
+      optionsContainer.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkQuizAnswer(opt, item.en);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function checkQuizAnswer(selected, correct) {
+      const feedback = document.getElementById('quiz-feedback');
+      if (selected === correct) {
+        feedback.innerText = "🎉 Chính xác! Bé giỏi quá! (+10 điểm Bài Chọn)";
+        feedback.style.color = "#27ae60";
+        addQuizScore(10);
+        setTimeout(() => {
+          currentQuizIndex = (currentQuizIndex + 1) % familyData.length;
+          setupQuizCard();
+        }, 1200);
+      } else {
+        feedback.innerText = "❌ Chưa đúng rồi, bé chọn lại nhé!";
+        feedback.style.color = "#e74c3c";
+      }
+    }
+
+    /* --- PHẦN 4: NỘP BÀI VÀ XEM BÁO CÁO --- */
+    function submitAssignment() {
+      const studentName = document.getElementById('student-name').value || "Bé Siêu Quậy";
+      const total = shadowScore + quizScore;
+
+      document.getElementById('report-student-name').innerText = studentName;
+      document.getElementById('report-shadow-score').innerText = shadowScore + " điểm";
+      document.getElementById('report-quiz-score').innerText = quizScore + " điểm";
+      document.getElementById('report-total-score').innerText = total + " điểm";
+
+      let stars = "⭐⭐⭐⭐⭐";
+      let evaluation = "🌟 Bé xuất sắc lắm! Phát âm hay và làm bài chuẩn xác!";
+
+      if (total < 30) {
+        stars = "⭐⭐⭐";
+        evaluation = "💪 Bé cố gắng thêm một chút nữa ở lượt sau nhé!";
+      } else if (total < 70) {
+        stars = "⭐⭐⭐⭐";
+        evaluation = "👍 Bé học rất ngoan! Rèn luyện thêm để đạt điểm tuyệt đối nhé!";
+      }
+
+      document.getElementById('report-stars').innerText = stars;
+      document.getElementById('report-evaluation').innerText = evaluation;
+
+      document.getElementById('report-modal').classList.add('active');
+    }
+
+    function closeReportModal() {
+      document.getElementById('report-modal').classList.remove('active');
+    }
+
+    function restartAll() {
+      shadowScore = 0;
+      quizScore = 0;
+      currentShadowIndex = 0;
+      currentQuizIndex = 0;
+
+      updateScoreUI();
+      setupShadowCard();
+      setupQuizCard();
+      closeReportModal();
+    }
+
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.getVoices();
+    };
+  </script>
+</body>
+</html>
